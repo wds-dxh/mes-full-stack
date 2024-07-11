@@ -3,8 +3,8 @@
       <div class="device-control">
         <h2>设备控制</h2>
         <el-form @submit.prevent="submitControl" label-width="200px">
-          <el-form-item label="目标位置">
-            <el-input v-model="position" placeholder="请输入目标位置" clearable></el-input>
+          <el-form-item label="目标位置" :error="positionError">
+            <el-input v-model="position" placeholder="请输入目标位置 (范围: 1-11)" clearable></el-input>
           </el-form-item>
           <el-form-item class="button-group">
             <el-button type="primary" @click="submitControl">发送</el-button>
@@ -47,11 +47,13 @@
   <script>
   import axios from 'axios';
   import { ref, onMounted } from 'vue';
+  import { ElNotification } from 'element-plus';
   
   export default {
     name: 'DeviceControl',
     setup() {
       const position = ref('');
+      const positionError = ref('');
       const agvStatus = ref({
         position: null,
         status: '离线',
@@ -62,8 +64,20 @@
   
       const submitControl = async () => {
         if (position.value === '') {
-          alert('请输入目标位置');
+          ElNotification({
+            title: '错误',
+            message: '请输入目标位置',
+            type: 'error',
+          });
           return;
+        }
+  
+        if (position.value < 1 || position.value > 11) {
+          ElNotification({
+            title: '提示',
+            message: '目标位置的范围是1-11',
+            type: 'warning',
+          });
         }
   
         try {
@@ -75,10 +89,18 @@
               }
             }
           );
-          alert(response.data.message);
+          ElNotification({
+            title: '成功',
+            message: response.data.message,
+            type: 'success',
+          });
         } catch (error) {
           console.error('Error:', error);
-          alert('发送控制命令失败');
+          ElNotification({
+            title: '错误',
+            message: '发送控制命令失败',
+            type: 'error',
+          });
         }
       };
   
@@ -96,11 +118,19 @@
               }
             }
           );
-          console.log('AGV Status:', response.data);  // 调试信息
           agvStatus.value = response.data;
+          ElNotification({
+            title: '成功',
+            message: '获取设备状态成功',
+            type: 'success',
+          });
         } catch (error) {
           console.error('Error:', error);
-          alert('获取设备状态失败');
+          ElNotification({
+            title: '错误',
+            message: '获取设备状态失败',
+            type: 'error',
+          });
         }
       };
   
@@ -110,6 +140,7 @@
   
       return {
         position,
+        positionError,
         submitControl,
         resetForm,
         agvStatus,

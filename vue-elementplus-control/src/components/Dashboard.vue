@@ -89,7 +89,7 @@ import {
 const deviceId = ref(1);
 
 const isCollapse = ref(false); // 左侧菜单是否折叠
-const currentView = ref(null); // 当前显示的视图
+const currentView = ref('device-control'); // 当前显示的视图
 
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath);
