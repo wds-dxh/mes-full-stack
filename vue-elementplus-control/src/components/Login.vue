@@ -1,4 +1,3 @@
-
 <template>
   <div class="login-container">
     <div class="login-box">
@@ -20,12 +19,10 @@
 </template>
 
 <script>
-
-
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-
+import { ElNotification } from 'element-plus'
 
 export default {
   setup() {
@@ -39,12 +36,29 @@ export default {
       try {
         const response = await axios.post('http://localhost:5000/api/login', loginForm.value)
         if (response.data.success) {
+          ElNotification({
+            title: '成功',
+            message: '登录成功',
+            type: 'success',
+            duration: 3000
+          })
           router.push(response.data.redirect_url)
         } else {
-          alert('登录失败')
+          ElNotification({
+            title: '失败',
+            message: '登录失败，请检查用户名和密码',
+            type: 'error',
+            duration: 3000
+          })
         }
       } catch (error) {
         console.error('登录错误', error)
+        ElNotification({
+          title: '错误',
+          message: '登录过程中发生错误',
+          type: 'error',
+          duration: 3000
+        })
       }
     }
 
@@ -54,11 +68,6 @@ export default {
     }
   }
 }
-
-
-
-
-
 </script>
 
 <style scoped>
@@ -67,7 +76,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-
 }
 
 .login-box {
@@ -101,12 +109,10 @@ export default {
 .login-form-item {
   margin-bottom: 20px;
 }
-  /*width: 100%;*/
-.login-button {
 
+.login-button {
   width: 85px;
   height: 35px;
   margin: 0 auto;
 }
 </style>
-

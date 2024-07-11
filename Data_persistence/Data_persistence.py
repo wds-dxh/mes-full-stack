@@ -1,3 +1,14 @@
+'''
+Author: wds-dxh wdsnpshy@163.com
+Date: 2024-07-11 11:00:35
+LastEditors: wds-dxh wdsnpshy@163.com
+LastEditTime: 2024-07-11 11:43:01
+FilePath: \Data_persistence\Data_persistence.py
+Description: 
+微信: 15310638214 
+邮箱：wdsnpshy@163.com 
+Copyright (c) 2024 by ${wds-dxh}, All Rights Reserved. 
+'''
 import paho.mqtt.client as mqtt
 import json
 from pymysql import Connection
@@ -25,7 +36,7 @@ def on_message(client, userdata, msg):
             host='cloud-5plus.dxh-wds.top',
             user='root',
             password='wdsshy0320',
-            database='smart_farm',  # 指定数据库
+            database='smart_factory',  # 指定数据库
         )
         print("数据库连接成功")
 
@@ -52,7 +63,7 @@ client = mqtt.Client()
 # 指定回调函数
 client.on_connect = on_connect
 client.on_message = on_message
-
+    
 # 建立连接
 client.connect('cloud-5plus.dxh-wds.top', 1883, 60)
 # 发布消息

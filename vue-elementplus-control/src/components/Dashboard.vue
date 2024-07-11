@@ -28,7 +28,6 @@
         <el-sub-menu index="1-1">
           <template #title>设备：{{ deviceId }}</template>
           <el-menu-item index="1-1-1" @click="handleMenuItemClick('1-1-1')">设备控制&状态信息</el-menu-item>
-          
         </el-sub-menu>
       </el-sub-menu>
 
@@ -37,7 +36,7 @@
           <el-icon><location /></el-icon>
           <span>车间管理</span>
         </template>
-        <el-menu-item index="1-1" @click="handleMenuItemClick('1-1')">车间状态信息</el-menu-item>
+        <el-menu-item index="2-1" @click="handleMenuItemClick('2-1')">车间状态信息</el-menu-item>
       </el-sub-menu>
 
       <el-menu-item index="3">
@@ -65,14 +64,15 @@
     <!-- 右侧内容区域 -->
     <div class="content">
       <DeviceControl v-if="currentView === 'device-control'" />
+      <WorkshopStatus v-if="currentView === 'workshop-status'" />
     </div>
   </div>
 </template>
 
 <script lang="js" setup>
 import { ref } from 'vue';
-import axios from 'axios';
 import DeviceControl from './DeviceControl.vue';
+import WorkshopStatus from './WorkshopStatus.vue';
 
 import {
   Menu as IconMenu,
@@ -102,6 +102,8 @@ const handleClose = (key, keyPath) => {
 const handleMenuItemClick = (index) => {
   if (index === '1-1-1') {
     currentView.value = 'device-control';
+  } else if (index === '2-1') {
+    currentView.value = 'workshop-status';
   } else {
     currentView.value = null;
   }

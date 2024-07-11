@@ -1,13 +1,24 @@
+'''
+Author: wds-dxh wdsnpshy@163.com
+Date: 2024-07-11 11:00:35
+LastEditors: wds-dxh wdsnpshy@163.com
+LastEditTime: 2024-07-11 11:26:55
+FilePath: \Data_persistence\Into_smart_farm.py
+Description: 
+微信: 15310638214 
+邮箱：wdsnpshy@163.com 
+Copyright (c) 2024 by ${wds-dxh}, All Rights Reserved. 
+'''
 from pymysql import Connection
 
 con = None
 try:
     # 连接数据库
     con = Connection(
-            host='cloud-5plus.dxh-wds.top',
+            host='vps.dxh-wds.top',
             user='root',
             password='wdsshy0320',
-            database='smart_farm',  # 指定数据库
+            database='smart_factory',  # 指定数据库
         )
     print("连接成功")
     print(con)
@@ -15,7 +26,7 @@ try:
     # 插入数据的 SQL 语句，包含 temperature、humidness、illumination 和 timestamp 字段
     sql = """
     INSERT INTO smart_factory_status(temperature, humidness, illumination, timestamp)
-    VALUES(25, 60, 1000, CURRENT_TIMESTAMP)
+    VALUES(33, 66, 555, CURRENT_TIMESTAMP)
     """
 
     # 使用游标对象执行sql语句并获取结果

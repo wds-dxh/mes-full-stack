@@ -1,3 +1,14 @@
+'''
+Author: wds-dxh wdsnpshy@163.com
+Date: 2024-07-11 11:00:35
+LastEditors: wds-dxh wdsnpshy@163.com
+LastEditTime: 2024-07-11 11:25:28
+FilePath: \Data_persistence\creat_smart_farm copy.py
+Description: 
+微信: 15310638214 
+邮箱：wdsnpshy@163.com 
+Copyright (c) 2024 by ${wds-dxh}, All Rights Reserved. 
+'''
 from pymysql import Connection
 
 con = None
@@ -7,7 +18,7 @@ try:
             host='cloud-5plus.dxh-wds.top',
             user='root',
             password='wdsshy0320',
-            database='smart_farm',  # 指定数据库
+            database='smart_factory',  # 指定数据库
         )
     print("连接成功")
     print(con)
