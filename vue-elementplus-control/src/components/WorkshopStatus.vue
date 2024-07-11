@@ -32,6 +32,17 @@
           <div ref="chart" class="chart"></div>
         </el-col>
       </el-row>
+      <el-row class="video-controls">
+        <el-col :span="24">
+          <div class="video-container">
+            <!-- <video id="video" controls autoplay>
+              <source src="http://172.20.10.5:5001/video_feed">
+              Your browser does not support the video tag.
+            </video> -->
+            <img src="http://172.20.10.5:5001/video_feed" width="640" height="480">
+          </div>
+        </el-col>
+      </el-row>
     </el-main>
   </el-container>
 </template>
@@ -62,7 +73,7 @@ export default {
   },
   methods: {
     fetchWorkshopData() {
-      axios.post('http://localhost:5000/workshop/status', { limit: this.recordLimit })
+      axios.post('http://172.20.10.5:5000/workshop/status', { limit: this.recordLimit })
         .then(response => {
           this.workshopData = response.data;
           this.renderChart();
@@ -209,5 +220,25 @@ export default {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.video-controls {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.video-container {
+  width: 100%;
+  height: 480px; /* 设置视频容器的高度 */
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
 }
 </style>

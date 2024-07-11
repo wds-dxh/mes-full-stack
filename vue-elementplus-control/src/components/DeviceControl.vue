@@ -81,7 +81,7 @@ export default {
       }
 
       try {
-        const response = await axios.post('http://127.0.0.1:5000/agv/control', 
+        const response = await axios.post('http://172.20.10.5:5000/agv/control', 
           JSON.stringify({ position: position.value }), 
           {
             headers: {
@@ -110,7 +110,7 @@ export default {
 
     const fetchAgvStatus = async () => {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/agv/status', 
+        const response = await axios.post('http://172.20.10.5:5000/agv/status', 
           JSON.stringify({ detail: 'full' }), 
           {
             headers: {

@@ -34,7 +34,7 @@ export default {
 
     const handleLogin = async () => {
       try {
-        const response = await axios.post('http://localhost:5000/api/login', loginForm.value)
+        const response = await axios.post('http://172.20.10.5:5000/api/login', loginForm.value)
         if (response.data.success) {
           ElNotification({
             title: '成功',
